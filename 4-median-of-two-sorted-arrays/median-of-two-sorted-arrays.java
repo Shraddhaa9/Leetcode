@@ -1,6 +1,4 @@
 import java.util.*;
-// import java.util.Collections;
-
 
 class Solution {
     public double findMedianSortedArrays(int[] nums1, int[] nums2) {
@@ -29,7 +27,6 @@ class Solution {
             double a = Double.valueOf(arr.get(medIdx-1));
             double b = Double.valueOf(arr.get(medIdx));
             median = (a+b)/2;
-            System.out.println("CHK1: Median of merged array is: " + median + " medIdx " + medIdx);
         }
 
         return median;
