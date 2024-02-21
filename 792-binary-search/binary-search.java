@@ -6,7 +6,7 @@ class Solution {
         int idx = 0;
         while (start <= end)
         {
-            mid = start + (end - start)/2;
+            mid = (start + end)/2;
             if (target == nums[mid]) {
                 return mid;
             } else if (target >= nums[mid]) {
