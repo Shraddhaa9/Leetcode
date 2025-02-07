@@ -15,9 +15,8 @@ class Solution:
         
         hs = set()
         for item in nums:
-            if item not in hs:
-                hs.add(item)
-            else:
+            if item in hs:
                 return True
+            hs.add(item)
         
         return False  
