@@ -26,11 +26,19 @@
 ## same like array, increment and decrement and get the result
 ## TC: O(n) - as iterating through single pass, as length of string same, if not same exiting from start only
 ## SC: O(1) - as only 26 character length array
+from collections import Counter
 
 class Solution:
     def isAnagram(self, s: str, t: str) -> bool:
-        # Better approach: Sorting one
-            return sorted(s) == sorted(t)
+        ## Optimal: Hashmap one
+        if len(s) != len(t):
+            return False
+        return Counter(s) == Counter(t)
+
+        # # Better approach: Sorting one
+        # if len(s) != len(t):
+        #     return False
+        # return sorted(s) == sorted(t)
 
         ## BruteForce:
         # if len(s) != len(t):
