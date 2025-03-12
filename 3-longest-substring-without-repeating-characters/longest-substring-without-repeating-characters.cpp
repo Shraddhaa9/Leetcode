@@ -16,9 +16,39 @@
 // time complexity: o(n^2)
 // space complexity: O(k)
 
+
+// OPTIMIZED APPROACH: SLIDING WINDOW
+// We will have two pointers, one slow and 2nd fast pointer, fast pointer will traverse fast,
+// increasing length of substring till we find repeating character, and slow pointer will
+// move when we find repeated character, we will again use set, for storing unique characters
+// we will keep storing maximum length of substring based on set size,
+// so we will get maximum length at end
+
+// TC: o(n)
+// SC: o(k)
+
+
 class Solution {
 public:
     int lengthOfLongestSubstring(string s) {
+        int maxLength = 0;
+        int n = s.length();
+        int slow = 0;
+
+        unordered_set<char> usc;
+        for (int fast = 0; fast < n; fast++)
+        {
+            while (usc.find(s[fast]) != usc.end()) {
+                usc.erase(s[slow]);
+                slow++;
+            }
+            usc.insert(s[fast]);
+            maxLength = max(maxLength, (int)usc.size());
+        }
+
+    return maxLength;
+#if 0
+// Brute force:
         int maxLength = 0;
         int n = s.length();
 
@@ -34,5 +64,6 @@ public:
         }
 
         return maxLength;
+#endif
     }
 };
