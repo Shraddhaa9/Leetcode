@@ -16,6 +16,19 @@
 // TC: O(nlogn) + O(n) === O(n logn)
 // SC: O(1)
 
+// OPTIMAL SOLUTION:
+// Get expected sum based on the range, as you already have idea about the number,
+// so we can easily calculate expected sum
+// Also, calculate sum for the given nums array
+// So, difference of both of these will give the missing number in the array
+
+// For getting expected sum, we are doing just one calculation, so for TC is O(1)
+// For getting sum for nums, we doing linear calculation so it's O(n)
+// And, we are not using any extra memory so it's O(1)
+
+// TC: O(1) + O(n) ==== O(n)
+// SC: O(1)
+
 class Solution {
 public:
     int missingNumber(vector<int>& nums) {
