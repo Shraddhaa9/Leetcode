@@ -54,8 +54,43 @@
 
 
 
+// 3rd approach - don't use sort
+
+
+
 class Solution {
 public:
+    vector<vector<string>> groupAnagrams(vector<string>& strs) {
+        unordered_map<string, vector<string>> anagramGroups;
+
+        for (const string& str : strs) {
+            // Create a frequency-based key
+            vector<int> freq(26, 0);  // Frequency array for a-z
+            
+            for (char c : str) {
+                freq[c - 'a']++;  // Increment frequency count
+            }
+
+            // Convert frequency array to a string key
+            string key;
+            for (int count : freq) {
+                key += to_string(count) + "#";  // Unique separator to avoid ambiguity
+            }
+
+            // Group strings with the same frequency signature
+            anagramGroups[key].push_back(str);
+        }
+
+        // Convert hashmap values to result vector
+        vector<vector<string>> result;
+        for (auto& group : anagramGroups) {
+            result.push_back(group.second);
+        }
+
+        return result;
+    }
+
+#if 0
     vector<vector<string>> groupAnagrams(vector<string>& strs) {
         unordered_map<string, vector<string>> umsvs;
 
@@ -75,6 +110,7 @@ public:
         return result;
 
     }
+#endif
 #if 0
     unordered_map<char, int> getFrequencyMap(const string& s) {
         unordered_map<char, int> freq;
