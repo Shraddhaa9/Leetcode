@@ -59,7 +59,7 @@ public:
     vector<vector<string>> groupAnagrams(vector<string>& strs) {
         unordered_map<string, vector<string>> umsvs;
 
-        for (auto istr : strs)
+        for (auto& istr : strs)
         {
             string sortedStr = istr;
             sort(sortedStr.begin(), sortedStr.end());
@@ -67,7 +67,7 @@ public:
         }
 
         vector<vector<string>> result;
-        for (auto group : umsvs)
+        for (auto& group : umsvs)
         {
             result.push_back(group.second);
         }
