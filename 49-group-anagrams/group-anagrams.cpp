@@ -55,35 +55,45 @@
 
 
 // 3rd approach - don't use sort
+// if not sort, then how do i have unique key?
+// we will still use hashmap, but this time key will be different
+// as using hashmap give O(1) insert and access
+// so, we will have freq map, since we have only 26 characters, we will have same freq map
+// for each matching anagrams
+// we will iterate through string from given array, we will get the freq count,
+// we will generate some sort of key, which will be unique for each anagrams, as freq counts
+// are matching, so once we get this key, we will store result in hashmap value
 
+// once we have our hashmap prepared for each given strings, we will just add each groups
+// to our resultant array
 
 
 class Solution {
 public:
     vector<vector<string>> groupAnagrams(vector<string>& strs) {
-        unordered_map<string, vector<string>> anagramGroups;
+        unordered_map<string, vector<string>> umsvs;
 
-        for (const string& str : strs) {
-            // Create a frequency-based key
-            vector<int> freq(26, 0);  // Frequency array for a-z
+        for (const auto& str : strs)
+        {
+            vector<int> freq(26, 0);
             
-            for (char c : str) {
-                freq[c - 'a']++;  // Increment frequency count
+
+            for(char c : str){
+                freq[c - 'a']++;
             }
 
-            // Convert frequency array to a string key
             string key;
-            for (int count : freq) {
-                key += to_string(count) + "#";  // Unique separator to avoid ambiguity
+            for (int i : freq)
+            {
+                key += to_string(i) + "%";
             }
 
-            // Group strings with the same frequency signature
-            anagramGroups[key].push_back(str);
+            umsvs[key].push_back(str);
         }
 
-        // Convert hashmap values to result vector
         vector<vector<string>> result;
-        for (auto& group : anagramGroups) {
+        for(auto& group : umsvs)
+        {
             result.push_back(group.second);
         }
 
