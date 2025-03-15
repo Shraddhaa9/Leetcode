@@ -35,9 +35,21 @@
 
 // COMMENTS:
 // It has many redundency operations going on, we have to recheck
+// getFrequencyMap(s) runs in O(K), where K` is the string length.
+// Nested loop leads to O(N^2 * K), making this approach inefficient for large inputs.
 
 
 
+// 2nd approach - using sorted strings in hashmap:
+// Iterate through the list of strings.
+// For each string, compute a key (sorted string).
+// Use a hashmap where the key is the sorted string, and the value is a list of anagrams.
+// Finally, return the grouped anagrams.
+
+// Sorting each word → O(K log K), where K is the average length of a word.
+// Hashmap operations → O(1), since we use a string as a key.
+// Final traversal → O(N), where N is the number of words.
+// TC: O(N * K log K) (Better than O(N^2))
 
 
 
@@ -45,19 +57,23 @@
 class Solution {
 public:
     vector<vector<string>> groupAnagrams(vector<string>& strs) {
-        unordered_map<string, vector<string>> anagramGroups;
-        
-        for (const string& str : strs) {
-            string sortedStr = str;  
-            sort(sortedStr.begin(), sortedStr.end()); // Sort characters as the key
-            anagramGroups[sortedStr].push_back(str);
+        unordered_map<string, vector<string>> umsvs;
+
+        for (auto istr : strs)
+        {
+            string sortedStr = istr;
+            sort(sortedStr.begin(), sortedStr.end());
+            umsvs[sortedStr].push_back(istr);
         }
 
         vector<vector<string>> result;
-        for (auto& group : anagramGroups) {
+        for (auto group : umsvs)
+        {
             result.push_back(group.second);
         }
+
         return result;
+
     }
 #if 0
     unordered_map<char, int> getFrequencyMap(const string& s) {
