@@ -9,11 +9,12 @@
  * };
  */
 
-// reverse a linked list
-// take first node from first list and 1st node from reversed list
+// two pointer approach:
+// find the midpoint
+// reverse a linked list - from midpoint's next
+// break the list from midpoint's next
+// take first node from original list and 1st node from reversed list
 // append both and keep traversing
-// till mid node reached
-// if required can have mid pointer stored as well somewhere
 
 class Solution {
 private:
