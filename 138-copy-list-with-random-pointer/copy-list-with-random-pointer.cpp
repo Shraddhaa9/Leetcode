@@ -14,6 +14,16 @@ public:
 };
 */
 
+// we use 2-passes here
+// cannot copy directly as when random node points to not allocated/created map
+// it can create issue as its pointing original node or null node maybe
+// so we can keep copy of node pointers using hashmap
+// in first pass we will create newNodes and will map it to original list's node
+// once thats completed
+// we will traverse through list again and LINK THE NEW LIST
+// we will link, next link as well as random link using hashmap
+// will return VALUE OF HEAD OF MAP, which will give us correct result
+
 class Solution {
 public:
     Node* copyRandomList(Node* head) {
