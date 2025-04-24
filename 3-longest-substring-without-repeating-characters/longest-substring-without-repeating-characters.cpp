@@ -31,6 +31,44 @@
 class Solution {
 public:
     int lengthOfLongestSubstring(string s) {
+        int size = s.size();
+        unordered_set<char> charSet;
+        int i = 0;
+        int j = 0;
+        int maxLength = 0;
+
+        while(j < size) {
+            if (charSet.find(s[j]) == charSet.end()) {
+                charSet.insert(s[j]);
+                maxLength = max(maxLength, j - i + 1);
+                j++;
+            } else {
+                while(charSet.find(s[j]) != charSet.end()) {
+                    charSet.erase(s[i]);
+                    i++;
+                }
+            }
+        }
+
+        return maxLength;
+#if 0
+        int size = s.size();
+        unordered_set<char> charSet;
+        int left = 0;
+        int maxLength = 0;
+
+        for(int right = 0; right < size; right++) {
+            while(charSet.find(s[right]) != charSet.end()) {
+                charSet.erase(s[left]);
+                left++;
+            }
+            charSet.insert(s[right]);
+            maxLength = std::max(maxLength, right-left+1);
+        }
+
+        return maxLength;
+#endif
+#if 0        
         int maxLength = 0;
         int n = s.length();
         int slow = 0;
@@ -43,10 +81,11 @@ public:
                 slow++;
             }
             usc.insert(s[fast]);
-            maxLength = max(maxLength, (int)usc.size());
+            maxLength = std::max(maxLength, (int)usc.size());
         }
 
     return maxLength;
+#endif
 #if 0
 // Brute force:
         int maxLength = 0;
