@@ -1,5 +1,12 @@
 class Solution {
 public:
+/*
+Input	Output
+[1,2,3]	[1,2,4]
+[4,9,9]	[5,0,0]
+[9,9,9]	[1,0,0,0]
+[2,0,9]	[2,1,0]
+*/
     vector<int> plusOne(vector<int>& digits) {
         int size = digits.size();
         for(int i = size - 1; i >= 0; i--) {
@@ -13,6 +20,7 @@ public:
 
         // we will generate new vector will +1 size to original and
         // will have first digit as 1 and rest of them as 0
+        // THIS IS THE EDGE CASE - for all 9s
         vector<int> result(size + 1, 0);
         result[0] = 1;
         return result;
