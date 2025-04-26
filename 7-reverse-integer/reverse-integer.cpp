@@ -1,7 +1,6 @@
 class Solution {
 public:
     int reverse(int x) {
-        bool isNegative = false;
         long revNum = 0;
         while(x != 0) {
             revNum = revNum * 10 + x % 10;
