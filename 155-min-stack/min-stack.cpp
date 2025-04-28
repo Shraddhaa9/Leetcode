@@ -16,9 +16,7 @@ public:
     }
     
     void pop() {
-        if (st.empty()) {
-            return;
-        }
+        if (st.empty()) return;
         int ans = st.top();
         st.pop();
         if (ans == ss.top()) {
@@ -32,10 +30,8 @@ public:
     }
     
     int getMin() {
-        if (!ss.empty()) {
-            return ss.top();
-        }
-        return 0;
+        if (ss.empty()) return 0;
+        return ss.top();
     }
 };
 
