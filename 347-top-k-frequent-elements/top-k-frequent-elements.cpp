@@ -23,28 +23,55 @@
 // element as pair, we compare 2nd element each time and get the result
 // time complexity:
 // O(n) + O(N * k) === O(n * k)
-// 20 cases passed, but got TLE for one
-// so need to have better approach
+// 20 cases passed, but got TLE for one; so need to have better approach
+// MISTAKE: traversing hashmap iteratively, which was not needed to find largest element
+// in the list
 
 //------
+// better approach:
+// also we can use priority queue for min heap as well
+// We can use hashmap with key, value -> where key is element and for value we will
+// keep increasing occurences of elements
+// once we have hashmap, we will generate min heap from hashmap - o(n)
+// once we have heap, we will remove top k elements
+// get the answer array
 
-// sort the array - O(n logn)
-// once array is sorted - traverse through the array, store element with index, occurence
-// 
-
-
-
-// also we can use priority queue for max elements as well
-// it will give top occurence elements 
-// but that will be o(log n) - so i think this works
 
 class Solution {
 public:
     vector<int> topKFrequent(vector<int>& nums, int k) {
+#if 1
+        // Better approach:
+        vector<int> result;
         unordered_map<int, int> mp;
-        for(int i = 0; i<nums.size(); i++)
+
+        for(int num: nums) {
+            mp[num]++;
+        }
+
+        priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
+        for (auto &[num, freq]: mp) {
+            pq.push({freq, num});
+            if (pq.size() > k) pq.pop();
+        }
+
+        while(!pq.empty()) {
+            auto [freq, num] = pq.top();
+            pq.pop();
+            result.push_back(num);
+        }
+
+        return result;
+
+#endif
+
+#if 0
+        // Brute force approach:
+        
+        unordered_map<int, int> mp;
+        for(auto num : nums)
         {
-            mp[nums[i]]++;
+            mp[num]++;
         }
 
         vector<int> res;
@@ -63,5 +90,6 @@ public:
         }
 
         return res;
+#endif
     }
 };
