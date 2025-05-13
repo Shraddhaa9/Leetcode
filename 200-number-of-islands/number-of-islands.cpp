@@ -1,6 +1,6 @@
 class Solution {
 private:
-    bool explore(vector<vector<char>>& grid, int r, int c, vector<vector<bool>>& visited) {
+    bool explore(vector<vector<char>>& grid, int r, int c, set<pair<int, int>>& visited) {
         bool rowInbounds = r >= 0 && r < grid.size();
         bool colInbounds = c >= 0 && c < grid[0].size();
 
@@ -8,9 +8,9 @@ private:
 
         if(grid[r][c] == '0') return false;
 
-        if(visited[r][c]) return false;
+        if(visited.count({r, c})) return false;
 
-        visited[r][c] = true;
+        visited.insert({r, c});        
         explore(grid, r-1, c, visited);
         explore(grid, r+1, c, visited);
         explore(grid, r, c-1, visited);
@@ -21,7 +21,7 @@ private:
 public:
     int numIslands(vector<vector<char>>& grid) {
         int islands = 0;
-        vector<vector<bool>> visited(grid.size(), vector<bool>(grid[0].size(), false));
+        set<pair<int, int>> visited;
 
         for(int r = 0; r < grid.size(); r++) {
             for(int c = 0; c < grid[0].size(); c++) {
