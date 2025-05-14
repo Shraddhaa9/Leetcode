@@ -1,4 +1,5 @@
 class Solution {
+#if 0
 public:
     int trap(vector<int>& height) {
         int res = 0;
@@ -21,7 +22,7 @@ public:
 
         return res;
     }
-#if 0
+#else
 public:
     int trap(vector<int>& height) {
         int n = height.size();
