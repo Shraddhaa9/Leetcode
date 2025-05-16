@@ -9,13 +9,13 @@ private:
     //     }
     //     return result;
     // }
-    bool dfs(int node, vector<vector<int>>& adjList, vector<bool>& visited, vector<bool>& onPath, stack<int>& s) {
+    bool dfs(int node, vector<vector<int>>& adjList, vector<bool>& visited, vector<bool>& onPath) {
         visited[node] = true;
         onPath[node] = true;
 
         for(auto neighbour : adjList[node]) {
             if(!visited[neighbour]) {
-                if (!dfs(neighbour, adjList, visited, onPath, s)) {
+                if (!dfs(neighbour, adjList, visited, onPath)) {
                     return false;
                 }
             } else if (onPath[neighbour]) {
@@ -24,7 +24,6 @@ private:
         }
 
         onPath[node] = false;
-        s.push(node);
         return true;
     }
 
@@ -39,11 +38,10 @@ public:
 
         vector<bool> visited(numCourses, false);
         vector<bool> onPath(numCourses, false);
-        stack<int> s;
 
         for(int i = 0; i <numCourses; i++) {
             if(!visited[i]) {
-                if(!dfs(i, adjList, visited, onPath, s)) {
+                if(!dfs(i, adjList, visited, onPath)) {
                     return false;
                 }
             }
