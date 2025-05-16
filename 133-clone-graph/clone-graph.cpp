@@ -19,7 +19,41 @@ public:
 };
 */
 
+#if 1
 class Solution {
+    // BFS
+public:
+    Node* cloneGraph(Node* node) {
+        if (!node) return nullptr;
+
+        unordered_map<Node*, Node*> map;
+        queue<Node*> q;
+
+        Node *clone = new Node(node->val);
+        map[node] = clone;
+        q.push(node);
+
+        while(!q.empty()) {
+            auto curr = q.front();
+            q.pop();
+
+            for(auto neighbour : curr->neighbors) {
+                if(map.find(neighbour) == map.end()) {
+                    map[neighbour] = new Node(neighbour->val);
+                    q.push(neighbour);
+                }
+
+                map[curr]->neighbors.push_back(map[neighbour]);
+            }
+
+        }
+
+        return clone;
+    }
+};
+#else
+class Solution {
+    // DFS
 private:
     Node* dfs(Node *node, unordered_map<Node*, Node*>& map) {
         if (map.find(node) != map.end()) return map[node];
@@ -36,10 +70,10 @@ private:
 
 public:
     Node* cloneGraph(Node* node) {
-        unordered_map<Node*, Node*> map;
-
         if (!node) return nullptr;
 
+        unordered_map<Node*, Node*> map;
         return dfs(node, map);
     }
 };
+#endif
