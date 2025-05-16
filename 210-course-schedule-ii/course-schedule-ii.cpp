@@ -1,4 +1,6 @@
+#if 1
 class Solution {
+    // DFS topological
 private:
     bool dfs(int node, vector<vector<int>>& adjList, vector<bool>& visited, vector<bool>& onPath, stack<int>& s) {
         visited[node] = true;
@@ -49,3 +51,4 @@ public:
         return schedule;
     }
 };
+#endif
