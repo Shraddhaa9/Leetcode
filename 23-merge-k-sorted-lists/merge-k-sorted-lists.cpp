@@ -9,6 +9,35 @@
  * };
  */
 class Solution {
+#if 1
+struct cmp {
+    // this is for minheap
+    bool operator()(const ListNode* l1, const ListNode* l2) const {
+        return l1->val > l2->val;
+    }
+};
+
+public:
+    ListNode* mergeKLists(vector<ListNode*>& lists) {
+        if(!lists.size()) return nullptr;
+        priority_queue<ListNode*, vector<ListNode*>, cmp> pq;
+
+        for(auto node : lists) {
+            if(node) pq.push(node);
+        }
+
+        ListNode dummy(0);
+        ListNode *curr = &dummy;
+        while(!pq.empty()) {
+            curr->next = pq.top();
+            pq.pop();
+            curr = curr->next;
+            if(curr->next) pq.push(curr->next);
+        }
+
+        return dummy.next;
+    }
+#else
 private:
     ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) {
         ListNode *dummy = new ListNode(-1);
@@ -47,4 +76,5 @@ public:
 
         return lists[0];
     }
+#endif
 };
