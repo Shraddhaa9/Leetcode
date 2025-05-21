@@ -26,39 +26,54 @@ private:
 
 #if 1
 public:
+// newHead - resultant reversed list's head node
+// ktail - previous k node's tail node (already reversed)
+// khead - k node's head (to be reversed)
+// revHead - reverse list's head for k nodes
+// ptr - to skip k nodes every time
     ListNode* reverseKGroup(ListNode* head, int k) {
+        if(!head) return nullptr;
         ListNode *ptr = head;
         ListNode *ktail = nullptr;
         ListNode *newHead = nullptr;
 
         while(ptr != nullptr) {
             int count = 0;
+            // this ptr always points to k-skipped node's head
             ListNode *khead = ptr;
+
+            // Check if there are k nodes left
             while(count < k && ptr != nullptr) {
                 ptr = ptr->next;
                 count++;
             }
 
             if (count == k) {
+                // Reverse k nodes
                 ListNode *revHead = reverseLinkedList(khead, k);
 
+                // New head for the result list
                 if (newHead == nullptr) {
                     newHead = revHead;
                 }
 
+                // Connect with previous part
                 if (ktail != nullptr) {
                     ktail->next = revHead;
                 }
 
+                // ktail becomes the end of this reversed segment
                 ktail = khead;
+                // Move head to the next group
             } else {
+                // Less than k nodes left, do not reverse
                 if (ktail != nullptr) {
                     ktail->next = khead;
                 }
             }
         }
 
-        return newHead == nullptr ? head : newHead;
+        return newHead;
     }
 #else
 public:
