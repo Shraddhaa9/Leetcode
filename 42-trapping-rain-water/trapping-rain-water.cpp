@@ -45,9 +45,6 @@ public:
 
         for(int i = 0; i < n; i++) {
             minMaxLeftMaxRight[i] = min(maxLeft[i], maxRight[i]);
-        }
-
-        for(int i = 0; i < n; i++) {
             int val = minMaxLeftMaxRight[i] - height[i];
             if (val >= 0) {
                 res += val;
