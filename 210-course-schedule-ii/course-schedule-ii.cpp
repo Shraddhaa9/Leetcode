@@ -33,18 +33,14 @@ public:
         }
 
         while(!q.empty()) {
-            int size = q.size();
+            auto node = q.front();
+            q.pop();
+            schedule.push_back(node);
 
-            while(size--) {
-                auto node = q.front();
-                q.pop();
-                schedule.push_back(node);
-
-                for(auto neighbour : adjList[node]) {
-                    inDegrees[neighbour]--;
-                    if (inDegrees[neighbour] == 0) {
-                        q.push(neighbour);
-                    }
+            for(auto neighbour : adjList[node]) {
+                inDegrees[neighbour]--;
+                if (inDegrees[neighbour] == 0) {
+                    q.push(neighbour);
                 }
             }
         }
