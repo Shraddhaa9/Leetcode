@@ -32,18 +32,14 @@ public:
 
         int count = 0;
         while(!q.empty()) {
-            int size = q.size();
+            auto node = q.front();
+            q.pop();
+            count++;
 
-            while(size--) {
-                auto node = q.front();
-                q.pop();
-                count++;
-
-                for(auto neighbour : adjList[node]) {
-                    inDegrees[neighbour]--;
-                    if(inDegrees[neighbour] == 0) {
-                        q.push(neighbour);
-                    }
+            for(auto neighbour : adjList[node]) {
+                inDegrees[neighbour]--;
+                if(inDegrees[neighbour] == 0) {
+                    q.push(neighbour);
                 }
             }
         }
