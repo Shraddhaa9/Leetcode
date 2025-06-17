@@ -35,9 +35,6 @@ public:
         }
 
         int subSum = (target + sum) / 2;
-        // int ways = subsetSum(nums, subSum);
-        // return ways * (1 << zeroCount);
-
         return subsetSum(nums, subSum);
     }
 };
