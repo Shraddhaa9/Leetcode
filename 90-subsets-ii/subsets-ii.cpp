@@ -1,5 +1,28 @@
 class Solution {
 private:
+    void helper(vector<int>& input, int start, vector<int>& output, vector<vector<int>> &result) {
+        result.push_back(output);
+
+        for(int i = start; i < input.size(); i++) {
+            if (i > start && input[i] == input[i-1]) continue;
+            output.push_back(input[i]);
+            helper(input, i+1, output, result);
+            output.pop_back();
+        }
+    }
+
+public:
+    vector<vector<int>> subsetsWithDup(vector<int>& nums) {
+        sort(nums.begin(), nums.end());
+        vector<vector<int>> result;
+        vector<int> output;
+        helper(nums, 0, output, result);
+        return result;
+    }
+};
+#if 0
+class Solution {
+private:
     set<vector<int>> seen;
 
     void helper(vector<int> &input, vector<int> &output, vector<vector<int>>& result) {
@@ -30,3 +53,4 @@ public:
         return result;
     }
 };
+#endif
